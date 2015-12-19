@@ -72,6 +72,9 @@ Elm.Native.Touch.make = function(localRuntime) {
 	}
 	function end(e) {
 		var t = dict.remove(e.identifier);
+		if (typeof t === "undefined") {
+			return;
+		}
 		if (localRuntime.timer.now() - t.t < tapTime)
 		{
 			hasTap = true;
@@ -116,6 +119,7 @@ Elm.Native.Touch.make = function(localRuntime) {
 			}
 		}
 	}
+  /*
 	localRuntime.addListener([root.id], node, 'mousedown', function down(e) {
 		node.addEventListener('mousemove', move);
 		e.identifier = mouseID;
@@ -146,6 +150,7 @@ Elm.Native.Touch.make = function(localRuntime) {
 		}
 		dict.clear();
 	});
+  */
 
 	function dependency(f) {
 		var sig = A2( Signal.map, f, root );
