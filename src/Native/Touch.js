@@ -106,52 +106,6 @@ Elm.Native.Touch.make = function(localRuntime) {
 	listen('touchcancel', end);
 	listen('touchleave', end);
 
-	var mouseID = -1;
-	function move(e) {
-		var point = Utils.getXY(e);
-		for (var i = root.value.length; i--; ) {
-			if (root.value[i].id === mouseID)
-			{
-				root.value[i].x = point._0;
-				root.value[i].y = point._1;
-				localRuntime.notify(root.id, root.value);
-				break;
-			}
-		}
-	}
-  /*
-	localRuntime.addListener([root.id], node, 'mousedown', function down(e) {
-		node.addEventListener('mousemove', move);
-		e.identifier = mouseID;
-		start(e);
-		root.value.push(touch(e));
-		localRuntime.notify(root.id, root.value);
-	});
-	localRuntime.addListener([root.id], document, 'mouseup', function up(e) {
-		node.removeEventListener('mousemove', move);
-		e.identifier = mouseID;
-		end(e);
-		for (var i = root.value.length; i--; ) {
-			if (root.value[i].id === mouseID)
-			{
-				root.value.splice(i, 1);
-				--mouseID;
-				break;
-			}
-		}
-		localRuntime.notify(root.id, root.value);
-	});
-	localRuntime.addListener([root.id], node, 'blur', function blur(e) {
-		node.removeEventListener('mousemove', move);
-		if (root.value.length > 0)
-		{
-			localRuntime.notify(root.id, []);
-			--mouseID;
-		}
-		dict.clear();
-	});
-  */
-
 	function dependency(f) {
 		var sig = A2( Signal.map, f, root );
 		root.defaultNumberOfKids += 1;
